@@ -37,7 +37,7 @@
                                     <h1 class="fs-1" id="hours"></h1>
                                 </div>
                                 <div class="col">
-                                    <h1 class="fs-5">Hours</h1>
+                                    <h1 class="fs-5" id="text-hours">Hours</h1>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                                     <h1 class="fs-1" id="minutes"></h1>
                                 </div>
                                 <div class="col">
-                                    <h1 class="fs-5">Minutes</h1>
+                                    <h1 class="fs-5" id="text-minutes">Minutes</h1>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                                     <h1 class="fs-1" id="seconds"></h1>
                                 </div>
                                 <div class="col">
-                                    <h1 class="fs-5">seconds</h1>
+                                    <h1 class="fs-5" id="text-seconds">seconds</h1>
                                 </div>
                             </div>
                         </div>
@@ -98,6 +98,12 @@
         document.getElementById("hours").innerHTML = hours;
         document.getElementById("minutes").innerHTML = minutes;
         document.getElementById("seconds").innerHTML = seconds;
+
+        document.getElementById("text-hours").innerHTML = (hours < 2 ? "Hour" : "Hours");
+        document.getElementById("text-minutes").innerHTML = (minutes < 2 ? "Minute" : "Minutes");
+        document.getElementById("text-seconds").innerHTML = (seconds < 2 ? "Second" : "Seconds");
+
+
         // document.getElementById("stopwatch").innerHTML =
         //     (years > 0 ? years + "y " : "") +
         //     (months > 0 ? months + "m " : "") +
