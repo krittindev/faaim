@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="col text-center">
-                    <p class="fs-6 fst-italic text-muted">— Since 03/02/2022 —</p>
+                    <p class="fs-6 fst-italic text-muted" id="since">— Since 03/02/2022 18:00 —</p>
                     <div class="d-flex justify-content-center form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="darkmode"
                             onchange='darkmodeToggle(this);'>
@@ -97,52 +97,60 @@
     </div>
 </body>
 <script>
+    const RELATIONSHIP_DATE = new Date(2022, 1, 3, 18)
+    const FLIRT_DATE = new Date(2021, 10, 28, 9, 26)
+    let start = RELATIONSHIP_DATE;
+
     const params = new Proxy(new URLSearchParams(window.location.search), {
-    get: (searchParams, prop) => searchParams.get(prop),
+        get: (searchParams, prop) => searchParams.get(prop),
     });
-    let value = params.darkmode;
-    if(value != null){
-        darkmode();
+    let darkmode = params.darkmode;
+    let since = params.since;
+    if(darkmode != null){
+        setDarkmode();
         document.getElementById("darkmode").checked = true;
+    }
+    if(since != null){
+        start = FLIRT_DATE;
+        document.getElementById("since").textContent = "— Since 28/11/2021 09:26 —";
     }
 
     // Update the count down every 1 second
-    var x = setInterval(function () {
+    let x = setInterval(function () {
 
         // Get today's date and time
-        var now = new Date();
-        var start = new Date(2022, 1, 3, 18);
+        let now = new Date();
 
         // Find the distance between now and the count down date
-        var diff = Math.floor(now - start);
-        var day = 1000 * 60 * 60 * 24;
-        var hour = 1000 * 60 * 60;
-        var minute = 1000 * 60;
-        var second = 1000;
+        let diff = Math.floor(now - start);
+        let day = 1000 * 60 * 60 * 24;
+        let hour = 1000 * 60 * 60;
+        let minute = 1000 * 60;
+        let second = 1000;
 
-        var months = monthDiff(start, now);
+        let months = monthDiff(start, now);
 
-        var days = Math.floor(diff / day);
-        // var months = Math.floor(days / 31);
-        // var years = Math.floor(months / 12);
+        let days = Math.floor(diff / day);
+        // let months = Math.floor(days / 31);
+        // let years = Math.floor(months / 12);
 
-        var hours = Math.floor((diff % day) / hour);
-        var minutes = Math.floor((diff % hour) / minute);
-        var seconds = Math.floor((diff % minute) / second);
+        let hours = Math.floor((diff % day) / hour);
+        let minutes = Math.floor((diff % hour) / minute);
+        let seconds = Math.floor((diff % minute) / second);
 
         // Output the result in an element with id="demo"
-        document.getElementById("months").innerHTML = months;
-        document.getElementById("days").innerHTML = days;
-        document.getElementById("hours").innerHTML = hours;
-        document.getElementById("minutes").innerHTML = minutes;
-        document.getElementById("seconds").innerHTML = seconds;
+        document.getElementById("months").textContent = months;
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
 
-        document.getElementById("text-hours").innerHTML = (hours < 2 ? "Hour" : "Hours");
-        document.getElementById("text-minutes").innerHTML = (minutes < 2 ? "Minute" : "Minutes");
-        document.getElementById("text-seconds").innerHTML = (seconds < 2 ? "Second" : "Seconds");
+        document.getElementById("text-hours").textContent = (hours < 2 ? "Hour" : "Hours");
+        document.getElementById("text-minutes").textContent = (minutes < 2 ? "Minute" : "Minutes");
+        document.getElementById("text-seconds").textContent = (seconds < 2 ? "Second" : "Seconds");
 
 
-        // document.getElementById("stopwatch").innerHTML =
+        // document.getElementById("stopwatch").textContent =
         //     (years > 0 ? years + "y " : "") +
         //     (months > 0 ? months + "m " : "") +
         //     (days > 0 ? days + "d " : "") +
@@ -153,7 +161,7 @@
     }, 1000);
 
     function monthDiff(d1, d2) {
-        var months;
+        let months;
         months = (d2.getFullYear() - d1.getFullYear()) * 12;
         months -= d1.getMonth();
         months += d2.getMonth();
@@ -170,12 +178,12 @@
     function darkmodeToggle(checkbox) {
         let body = document.getElementById("body");
         if (checkbox.checked)
-            darkmode();
+            setDarkmode();
         else
-            lightmode();
+            setLightmode();
     }
 
-    function darkmode() {
+    function setDarkmode() {
         let body = document.getElementById("body");
         body.classList.remove("bg-light");
         body.classList.remove("text-dark");
@@ -183,7 +191,7 @@
         body.classList.add("text-light");
     }
 
-    function lightmode() {
+    function setLightmode() {
         let body = document.getElementById("body");
         body.classList.remove("bg-dark");
         body.classList.remove("text-light");
