@@ -84,7 +84,9 @@
                     </div>
                 </div>
                 <div class="col text-center">
-                    <p class="fs-6 fst-italic text-muted" id="since">— Since 03/02/2022 18:00 —</p>
+                    <a class="text-decoration-none" href="" id="since-link">
+                        <p class="fs-6 fst-italic text-muted" id="since">— Since 03/02/2022 18:00 —</p>
+                    </a>
                     <div class="d-flex justify-content-center form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="darkmode"
                             onchange='darkmodeToggle(this);'>
@@ -112,7 +114,11 @@
     }
     if(since != null){
         start = FLIRT_DATE;
-        document.getElementById("since").textContent = "— Since 28/11/2021 09:26 —";
+        document.getElementById("since").textContent = "— Flirt Since 28/11/2021 09:26 —";
+        document.getElementById("since-link").href = "https://tuliptgr.github.io/faaim/";
+    }else{
+        document.getElementById("since").textContent = "— In Relationship Since 03/02/2022 18:00 —";
+        document.getElementById("since-link").href = "https://tuliptgr.github.io/faaim/?since";
     }
 
     // Update the count down every 1 second
