@@ -106,9 +106,12 @@
     </div>
 </body>
 <script>
-    const RELATIONSHIP_DATE = new Date('February 03, 2022 18:00:00 GMT+07:00')
-    const FLIRT_DATE = new Date('November 28, 2021 09:26:00 GMT+07:00')
+    //const RELATIONSHIP_DATE = new Date('February 03, 2022 18:00:00 GMT+07:00');
+    //const FLIRT_DATE = new Date('November 28, 2021 09:26:00 GMT+07:00');
+    const RELATIONSHIP_DATE = new Date('February 03, 2022 18:00:00');
+    const FLIRT_DATE = new Date('November 28, 2021 09:26:00');
     let sinceDate = RELATIONSHIP_DATE;
+    let imageIndex = 0;
     
     urlWrapper()
     let x = setInterval(function () {updateDate();}, 1000);
@@ -132,8 +135,10 @@
             document.getElementById("since-text").textContent = "— In Relationship Since 03/02/2022 18:00 —";
         }
         if (image_paint != null) {
+            imageIndex = 1;
             document.getElementById("image-polaroid").src = "images/polaroid_paint.png";
         } else {
+            imageIndex = 0;
             document.getElementById("image-polaroid").src = "images/polaroid_raw.jpg";
         }
     }
@@ -211,9 +216,11 @@
     }
 
     function imageToggle(img) {
-        if (img.src == "images/polaroid_raw.jpg") {
+        if (imageIndex == 0) {
+            imageIndex = 1;
             img.src = "images/polaroid_paint.png";
         } else {
+            imageIndex = 0;
             img.src = "images/polaroid_raw.jpg";
         }
     }
