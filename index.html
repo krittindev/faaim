@@ -136,9 +136,9 @@
             document.getElementById("since").textContent = "— In Relationship Since 03/02/2022 18:00 —";
         }
         if (image_paint != null) {
-            document.getElementById("image-polaroid").src = "polaroid_paint.png";
+            document.getElementById("image-polaroid").src = "images/polaroid_paint.png";
         } else {
-            document.getElementById("image-polaroid").src = "polaroid_raw.jpg";
+            document.getElementById("image-polaroid").src = "images/polaroid_raw.jpg";
         }
     }
 
@@ -217,11 +217,10 @@
 
     function imageToggle() {
         let src = document.getElementById("image-polaroid").src;
-        console.log(src == "polaroid_raw.jpg");
-        if (scr == "polaroid_raw.jpg") {
-            document.getElementById("image-polaroid").src = "polaroid_paint.png";
+        if (src == "images/polaroid_raw.jpg") {
+            document.getElementById("image-polaroid").src = "images/polaroid_paint.png";
         } else {
-            document.getElementById("image-polaroid").src = "polaroid_raw.jpg";
+            document.getElementById("image-polaroid").src = "images/polaroid_raw.jpg";
         }
     }
 
