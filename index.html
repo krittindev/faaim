@@ -11,7 +11,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
-<body class="bg-light text-dark h-100" id="body">
+<body id="body" class="bg-light text-dark h-100">
     <div class="container h-100">
         <div class="d-flex align-items-center justify-content-center h-100">
             <div class="row row-cols-1 p-1 g-4">
@@ -19,20 +19,31 @@
                     <img src="images/revolving-hearts_1f49e.png" style="width: 3rem;" alt="">
                 </div>
                 <div class="col text-center">
-                    <img class="shadow rounded"
-                        src="https://cdn.discordapp.com/attachments/946618575370723332/951488134024134676/EF8A04B3-0652-437A-871F-4F36AE6EFEE8.jpg"
-                        style="height: 40vh;" alt="">
+                    <a id="image-link" class="text-decoration-none" href="javascript:void(0);" onclick="imageToggle();">
+                        <img id="image-polaroid" class="shadow rounded" style="height: 40vh;"
+                            alt="">
+                    </a>
                 </div>
                 <div class="col text-center">
                     <!-- <h1 id="stopwatch" class="fs-5"></h1> -->
-                    <div class="row row-cols-1">
-                        <div class="col">
+                    <div class="row">
+                        <div id="year-card" class="col">
                             <div class="row row-cols-1">
                                 <div class="col">
-                                    <h1 class="fs-5" id="months"></h1>
+                                    <h1 id="year-text" class="fs-5"></h1>
                                 </div>
                                 <div class="col">
-                                    <h1 class="fs-6">Months</h1>
+                                    <h1 id="year-suffix" class="fs-6">Years</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="month-card" class="col">
+                            <div class="row row-cols-1">
+                                <div class="col">
+                                    <h1 id="month-text" class="fs-5"></h1>
+                                </div>
+                                <div class="col">
+                                    <h1 id="month-suffix" class="fs-6">Months</h1>
                                 </div>
                             </div>
                         </div>
@@ -40,55 +51,55 @@
                 </div>
                 <div class="col text-center">
                     <!-- <h1 id="stopwatch" class="fs-5"></h1> -->
-                    <div class="row row-cols-4">
-                        <div class="col">
+                    <div class="row">
+                        <div id="day-card" class="col">
                             <div class="row row-cols-1">
                                 <div class="col">
-                                    <h1 class="fs-5" id="days"></h1>
+                                    <h1 id="day-text" class="fs-5"></h1>
                                 </div>
                                 <div class="col">
-                                    <h1 class="fs-6">Days</h1>
+                                    <h1 id="day-suffix" class="fs-6">Days</h1>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div id="hour-card" class="col">
                             <div class="row row-cols-1">
                                 <div class="col">
-                                    <h1 class="fs-5" id="hours"></h1>
+                                    <h1 id="hour-text" class="fs-5"></h1>
                                 </div>
                                 <div class="col">
-                                    <h1 class="fs-6" id="text-hours">Hours</h1>
+                                    <h1 id="hour-suffix" class="fs-6">Hours</h1>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div id="minute-card" class="col">
                             <div class="row row-cols-1">
                                 <div class="col">
-                                    <h1 class="fs-5" id="minutes"></h1>
+                                    <h1 id="minute-text" class="fs-5"></h1>
                                 </div>
                                 <div class="col">
-                                    <h1 class="fs-6" id="text-minutes">Minutes</h1>
+                                    <h1 id="minute-suffix" class="fs-6">Minutes</h1>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col" id="second-card">
                             <div class="row row-cols-1">
                                 <div class="col">
-                                    <h1 class="fs-5" id="seconds"></h1>
+                                    <h1 class="fs-5" id="second-text"></h1>
                                 </div>
                                 <div class="col">
-                                    <h1 class="fs-6" id="text-seconds">seconds</h1>
+                                    <h1 class="fs-6" id="second-suffix">seconds</h1>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col text-center">
-                    <a class="text-decoration-none" href="" id="since-link">
-                        <p class="fs-6 fst-italic text-muted" id="since">— Since 03/02/2022 18:00 —</p>
+                    <a id="since-link" class="text-decoration-none" href="javascript:void(0);" onclick="sinceToggle();">
+                        <p id="since" class="fs-6 fst-italic text-muted">— Since 03/02/2022 18:00 —</p>
                     </a>
                     <div class="d-flex justify-content-center form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="darkmode"
+                        <input id="darkmode-toggle" class="form-check-input" type="checkbox" role="switch"
                             onchange='darkmodeToggle(this);'>
                     </div>
                 </div>
@@ -99,86 +110,89 @@
     </div>
 </body>
 <script>
-    const RELATIONSHIP_DATE = new Date(2022, 1, 3, 18)
-    const FLIRT_DATE = new Date(2021, 10, 28, 9, 26)
-    let start = RELATIONSHIP_DATE;
+    const RELATIONSHIP_DATE = new Date('February 03, 2022 18:00:00 GMT+07:00')
+    const FLIRT_DATE = new Date('November 28, 2021 09:26:00 GMT+07:00')
+    let sinceDate = RELATIONSHIP_DATE;
+    
+    urlWrapper()
+    let x = setInterval(function () {updateDate();}, 1000);
 
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-    });
-    let darkmode = params.darkmode;
-    let since = params.since;
-    if(darkmode != null){
-        setDarkmode();
-        document.getElementById("darkmode").checked = true;
-    }
-    if(since != null){
-        start = FLIRT_DATE;
-        document.getElementById("since").textContent = "— Flirt Since 28/11/2021 09:26 —";
-        document.getElementById("since-link").href = "https://tuliptgr.github.io/faaim/";
-    }else{
-        document.getElementById("since").textContent = "— In Relationship Since 03/02/2022 18:00 —";
-        document.getElementById("since-link").href = "https://tuliptgr.github.io/faaim/?since";
-    }
-
-    // Update the count down every 1 second
-    let x = setInterval(function () {
-
-        // Get today's date and time
-        let now = new Date();
-
-        // Find the distance between now and the count down date
-        let diff = Math.floor(now - start);
-        let day = 1000 * 60 * 60 * 24;
-        let hour = 1000 * 60 * 60;
-        let minute = 1000 * 60;
-        let second = 1000;
-
-        let months = monthDiff(start, now);
-
-        let days = Math.floor(diff / day);
-        // let months = Math.floor(days / 31);
-        // let years = Math.floor(months / 12);
-
-        let hours = Math.floor((diff % day) / hour);
-        let minutes = Math.floor((diff % hour) / minute);
-        let seconds = Math.floor((diff % minute) / second);
-
-        // Output the result in an element with id="demo"
-        document.getElementById("months").textContent = months;
-        document.getElementById("days").textContent = days;
-        document.getElementById("hours").textContent = hours;
-        document.getElementById("minutes").textContent = minutes;
-        document.getElementById("seconds").textContent = seconds;
-
-        document.getElementById("text-hours").textContent = (hours < 2 ? "Hour" : "Hours");
-        document.getElementById("text-minutes").textContent = (minutes < 2 ? "Minute" : "Minutes");
-        document.getElementById("text-seconds").textContent = (seconds < 2 ? "Second" : "Seconds");
-
-
-        // document.getElementById("stopwatch").textContent =
-        //     (years > 0 ? years + "y " : "") +
-        //     (months > 0 ? months + "m " : "") +
-        //     (days > 0 ? days + "d " : "") +
-        //     (hours > 0 ? hours + "h " : "") +
-        //     (minutes > 0 ? minutes + "m " : "") +
-        //     (seconds > 0 ? seconds + "s " : "");
-
-    }, 1000);
-
-    function monthDiff(d1, d2) {
-        let months;
-        months = (d2.getFullYear() - d1.getFullYear()) * 12;
-        months -= d1.getMonth();
-        months += d2.getMonth();
-        if (d2.getDate() < d1.getDate()) {
-            months -= 1;
-        } else if (d1.getDate() == d2.getDate()) {
-            if (d2.getHours() < d1.getHours()) {
-                months -= 1;
-            }
+    function urlWrapper() {
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        let darkmode = params.darkmode;
+        let since = params.since;
+        let image_paint = params.image_paint;
+        if (darkmode != null) {
+            setDarkmode();
+            document.getElementById("darkmode-toggle").checked = true;
         }
-        return months <= 0 ? 0 : months;
+        if (since != null) {
+            sinceDate = FLIRT_DATE;
+            document.getElementById("since").textContent = "— Flirt Since 28/11/2021 09:26 —";
+        } else {
+            sinceDate = RELATIONSHIP_DATE;
+            document.getElementById("since").textContent = "— In Relationship Since 03/02/2022 18:00 —";
+        }
+        if (image_paint != null) {
+            document.getElementById("image-polaroid").src = "polaroid_paint.png";
+        } else {
+            document.getElementById("image-polaroid").src = "polaroid_raw.jpg";
+        }
+    }
+
+    function updateDate() {
+        let now = new Date();
+        let diffDate = new Date(now - sinceDate);
+        updateDateText(diffDate);
+        updateDateSuffix(diffDate);
+        updateDateHindZero(diffDate);
+    }
+
+    function updateDateText(date) {
+        document.getElementById("year-text").textContent = date.getFullYear() - 1970;
+        document.getElementById("month-text").textContent = date.getMonth();
+        document.getElementById("day-text").textContent = date.getDate();
+        document.getElementById("hour-text").textContent = date.getHours();
+        document.getElementById("minute-text").textContent = date.getMinutes();
+        document.getElementById("second-text").textContent = date.getSeconds();
+    }
+
+    function updateDateSuffix(date) {
+        document.getElementById("year-suffix").textContent = (date.getFullYear() - 1970 < 2 ? "Year" : "Years");
+        document.getElementById("month-suffix").textContent = (date.getMonth() < 2 ? "Month" : "Months");
+        document.getElementById("day-suffix").textContent = (date.getDate() < 2 ? "Day" : "Days");
+        document.getElementById("hour-suffix").textContent = (date.getHours() < 2 ? "Hour" : "Hours");
+        document.getElementById("minute-suffix").textContent = (date.getMinutes() < 2 ? "Minute" : "Minutes");
+        document.getElementById("second-suffix").textContent = (date.getSeconds() < 2 ? "Second" : "Seconds");
+    }
+
+    function updateDateHindZero(date) {
+        if (date.getFullYear() - 1970 <= 0)
+            document.getElementById('year-card').hidden = true;
+        else
+            document.getElementById('year-card').hidden = false;
+        if (date.getMonth() <= 0)
+            document.getElementById('month-card').hidden = true;
+        else
+            document.getElementById('month-card').hidden = false;
+        if (date.getDate() <= 0)
+            document.getElementById('day-card').hidden = true;
+        else
+            document.getElementById('day-card').hidden = false;
+        if (date.getHours() <= 0)
+            document.getElementById('hour-card').hidden = true;
+        else
+            document.getElementById('hour-card').hidden = false;
+        if (date.getMinutes() <= 0)
+            document.getElementById('minute-card').hidden = true;
+        else
+            document.getElementById('minute-card').hidden = false;
+        if (date.getSeconds() <= 0)
+            document.getElementById('second-card').hidden = true;
+        else
+            document.getElementById('second-card').hidden = false;
     }
 
     function darkmodeToggle(checkbox) {
@@ -187,6 +201,28 @@
             setDarkmode();
         else
             setLightmode();
+    }
+
+    function sinceToggle() {
+        if (sinceDate == RELATIONSHIP_DATE){
+            sinceDate = FLIRT_DATE;
+            document.getElementById("since").textContent = "— Flirt Since 28/11/2021 09:26 —";
+        }
+        else {
+            sinceDate = RELATIONSHIP_DATE;
+            document.getElementById("since").textContent = "— In Relationship Since 03/02/2022 18:00 —";
+        }
+        updateDate();
+    }
+
+    function imageToggle() {
+        let src = document.getElementById("image-polaroid").src;
+        console.log(src == "polaroid_raw.jpg");
+        if (scr == "polaroid_raw.jpg") {
+            document.getElementById("image-polaroid").src = "polaroid_paint.png";
+        } else {
+            document.getElementById("image-polaroid").src = "polaroid_raw.jpg";
+        }
     }
 
     function setDarkmode() {
