@@ -19,10 +19,8 @@
                     <img src="images/revolving-hearts_1f49e.png" style="width: 3rem;" alt="">
                 </div>
                 <div class="col text-center">
-                    <a id="image-link" class="text-decoration-none" href="javascript:void(0);" onclick="imageToggle();">
-                        <img id="image-polaroid" class="shadow rounded" style="height: 40vh;"
-                            alt="">
-                    </a>
+                    <img id="image-polaroid" class="shadow rounded" style="height: 40vh;"
+                            onclick="imageToggle(this);">
                 </div>
                 <div class="col text-center">
                     <!-- <h1 id="stopwatch" class="fs-5"></h1> -->
@@ -95,9 +93,7 @@
                     </div>
                 </div>
                 <div class="col text-center">
-                    <a id="since-link" class="text-decoration-none" href="javascript:void(0);" onclick="sinceToggle();">
-                        <p id="since" class="fs-6 fst-italic text-muted">— Since 03/02/2022 18:00 —</p>
-                    </a>
+                    <p id="since-text" class="fs-6 fst-italic text-muted" onclick="sinceToggle(this);"></p>
                     <div class="d-flex justify-content-center form-check form-switch">
                         <input id="darkmode-toggle" class="form-check-input" type="checkbox" role="switch"
                             onchange='darkmodeToggle(this);'>
@@ -130,10 +126,10 @@
         }
         if (since != null) {
             sinceDate = FLIRT_DATE;
-            document.getElementById("since").textContent = "— Flirt Since 28/11/2021 09:26 —";
+            document.getElementById("since-text").textContent = "— Flirt Since 28/11/2021 09:26 —";
         } else {
             sinceDate = RELATIONSHIP_DATE;
-            document.getElementById("since").textContent = "— In Relationship Since 03/02/2022 18:00 —";
+            document.getElementById("since-text").textContent = "— In Relationship Since 03/02/2022 18:00 —";
         }
         if (image_paint != null) {
             document.getElementById("image-polaroid").src = "images/polaroid_paint.png";
@@ -196,31 +192,29 @@
     }
 
     function darkmodeToggle(checkbox) {
-        let body = document.getElementById("body");
         if (checkbox.checked)
             setDarkmode();
         else
             setLightmode();
     }
 
-    function sinceToggle() {
+    function sinceToggle(p) {
         if (sinceDate == RELATIONSHIP_DATE){
             sinceDate = FLIRT_DATE;
-            document.getElementById("since").textContent = "— Flirt Since 28/11/2021 09:26 —";
+            p.textContent = "— Flirt Since 28/11/2021 09:26 —";
         }
         else {
             sinceDate = RELATIONSHIP_DATE;
-            document.getElementById("since").textContent = "— In Relationship Since 03/02/2022 18:00 —";
+            p.textContent = "— In Relationship Since 03/02/2022 18:00 —";
         }
         updateDate();
     }
 
-    function imageToggle() {
-        let src = document.getElementById("image-polaroid").src;
-        if (src == "images/polaroid_raw.jpg") {
-            document.getElementById("image-polaroid").src = "images/polaroid_paint.png";
+    function imageToggle(img) {
+        if (img.src == "images/polaroid_raw.jpg") {
+            img.src = "images/polaroid_paint.png";
         } else {
-            document.getElementById("image-polaroid").src = "images/polaroid_raw.jpg";
+            img.src = "images/polaroid_raw.jpg";
         }
     }
 
