@@ -168,7 +168,7 @@ function sinceToggle(p) {
     }
     else {
         sinceDate = RELATIONSHIP_DATE;
-        p.textContent = "— In Relationship Since 03/02/2022 18:00 —";
+        p.textContent = "— In a Relationship Since 03/02/2022 18:00 —";
     }
     updateDate();
 }
