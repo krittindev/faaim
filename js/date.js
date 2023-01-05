@@ -1,9 +1,5 @@
 const RELATIONSHIP_DATE = new Date('February 03, 2022 18:00:00 GMT+07:00');
 const FLIRT_DATE = new Date('November 28, 2021 09:26:00 GMT+07:00');
-//const RELATIONSHIP_DATE = new Date('February 03, 2022 18:00:00');
-//const FLIRT_DATE = new Date('November 28, 2021 09:26:00');
-// const RELATIONSHIP_DATE = new Date(2022, 1, 3, 18);
-// const FLIRT_DATE = new Date(2021, 10, 28, 9, 26);
 let sinceDate = RELATIONSHIP_DATE;
 
 function updateDate() {
@@ -14,41 +10,6 @@ function updateDate() {
     updateHourText(diffHour(now, sinceDate));
     updateMinuteText(diffMinute(now, sinceDate));
     updateSecondText(diffSecond(now, sinceDate));
-}
-
-function testDate() {
-    logDate(new Date(2022, 1, 4, 17));
-    logDate(new Date(2022, 1, 4, 17, 59));
-    logDate(new Date(2022, 1, 4, 17, 59, 59));
-    logDate(new Date(2022, 1, 4, 18));
-    logDate(new Date(2022, 2, 2, 18));
-    logDate(new Date(2022, 2, 3, 18));
-    logDate(new Date(2022, 2, 4, 18));
-    logDate(new Date(2023, 0, 2, 18));
-    logDate(new Date(2023, 0, 3, 18));
-    logDate(new Date(2023, 0, 4, 18));
-    logDate(new Date(2023, 1, 2, 18));
-    logDate(new Date(2023, 1, 3, 17));
-    logDate(new Date(2023, 1, 3, 17, 59));
-    logDate(new Date(2023, 1, 3, 17, 59, 59));
-    logDate(new Date(2023, 1, 3, 18));
-    logDate(new Date(2023, 1, 3, 18, 0, 1));
-    logDate(new Date(2023, 1, 4, 18));
-    logDate(new Date(2023, 2, 2, 18));
-    logDate(new Date(2023, 2, 3, 18));
-    logDate(new Date(2023, 2, 4, 18));
-}
-
-function logDate(date) {
-    console.log(
-        "%d/%d/%d %d:%d:%d",
-        diffYear(date, sinceDate),
-        diffMonth(date, sinceDate),
-        diffDay(date, sinceDate),
-        diffHour(date, sinceDate),
-        diffMinute(date, sinceDate),
-        diffSecond(date, sinceDate)
-    );
 }
 
 function diffYear(now, since) {
