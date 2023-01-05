@@ -19,13 +19,12 @@
                     <img src="images/revolving-hearts_1f49e.png" style="width: 3rem;" alt="">
                 </div>
                 <div class="col text-center">
-                    <img id="image-polaroid" class="shadow rounded" style="height: 40vh;"
-                            onclick="imageToggle(this);">
+                    <img id="image-polaroid" class="shadow rounded" style="height: 40vh;" onclick="imageToggle(this);">
                 </div>
                 <div class="col text-center">
                     <!-- <h1 id="stopwatch" class="fs-5"></h1> -->
                     <div class="row">
-                        <div id="year-card" class="col">
+                        <div id="year-card" class="col" hidden>
                             <div class="row row-cols-1">
                                 <div class="col">
                                     <h1 id="year-text" class="fs-5"></h1>
@@ -35,7 +34,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="month-card" class="col">
+                        <div id="month-card" class="col" hidden>
                             <div class="row row-cols-1">
                                 <div class="col">
                                     <h1 id="month-text" class="fs-5"></h1>
@@ -50,7 +49,7 @@
                 <div class="col text-center">
                     <!-- <h1 id="stopwatch" class="fs-5"></h1> -->
                     <div class="row">
-                        <div id="day-card" class="col">
+                        <div id="day-card" class="col" hidden>
                             <div class="row row-cols-1">
                                 <div class="col">
                                     <h1 id="day-text" class="fs-5"></h1>
@@ -60,7 +59,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="hour-card" class="col">
+                        <div id="hour-card" class="col" hidden>
                             <div class="row row-cols-1">
                                 <div class="col">
                                     <h1 id="hour-text" class="fs-5"></h1>
@@ -70,7 +69,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="minute-card" class="col">
+                        <div id="minute-card" class="col" hidden>
                             <div class="row row-cols-1">
                                 <div class="col">
                                     <h1 id="minute-text" class="fs-5"></h1>
@@ -80,7 +79,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col" id="second-card">
+                        <div class="col" id="second-card" hidden>
                             <div class="row row-cols-1">
                                 <div class="col">
                                     <h1 class="fs-5" id="second-text"></h1>
@@ -105,143 +104,14 @@
         </div>
     </div>
 </body>
+<script src="./js/date.js"></script>
+<script src="./js/image.js"></script>
+<script src="./js/theme.js"></script>
+<script src="./js/url.js"></script>
 <script>
-    const RELATIONSHIP_DATE = new Date('February 03, 2022 18:00:00 GMT+07:00');
-    const FLIRT_DATE = new Date('November 28, 2021 09:26:00 GMT+07:00');
-    //const RELATIONSHIP_DATE = new Date('February 03, 2022 18:00:00');
-    //const FLIRT_DATE = new Date('November 28, 2021 09:26:00');
-    //const RELATIONSHIP_DATE = new Date(2022, 1, 3, 18);
-    //const FLIRT_DATE = new Date(2021, 10, 28, 9, 26);
-    let sinceDate = RELATIONSHIP_DATE;
-    let imageIndex = 0;
-    
-    urlWrapper()
-    let x = setInterval(function () {updateDate();}, 1000);
-
-    function urlWrapper() {
-        const params = new Proxy(new URLSearchParams(window.location.search), {
-            get: (searchParams, prop) => searchParams.get(prop),
-        });
-        let darkmode = params.darkmode;
-        let since = params.since;
-        let image_paint = params.image_paint;
-        if (darkmode != null) {
-            setDarkmode();
-            document.getElementById("darkmode-toggle").checked = true;
-        }
-        if (since != null) {
-            sinceDate = FLIRT_DATE;
-            document.getElementById("since-text").textContent = "— Flirt Since 28/11/2021 09:26 —";
-        } else {
-            sinceDate = RELATIONSHIP_DATE;
-            document.getElementById("since-text").textContent = "— In Relationship Since 03/02/2022 18:00 —";
-        }
-        if (image_paint != null) {
-            imageIndex = 1;
-            document.getElementById("image-polaroid").src = "images/polaroid_paint.png";
-        } else {
-            imageIndex = 0;
-            document.getElementById("image-polaroid").src = "images/polaroid_raw.jpg";
-        }
-    }
-
-    function updateDate() {
-        let now = new Date();
-        let diffDate = new Date(now - sinceDate);
-        updateDateText(diffDate);
-        updateDateSuffix(diffDate);
-        updateDateHindZero(diffDate);
-    }
-
-    function updateDateText(date) {
-        document.getElementById("year-text").textContent = date.getFullYear() - 1970;
-        document.getElementById("month-text").textContent = date.getMonth();
-        document.getElementById("day-text").textContent = date.getDate();
-        document.getElementById("hour-text").textContent = date.getHours();
-        document.getElementById("minute-text").textContent = date.getMinutes();
-        document.getElementById("second-text").textContent = date.getSeconds();
-    }
-
-    function updateDateSuffix(date) {
-        document.getElementById("year-suffix").textContent = (date.getFullYear() - 1970 < 2 ? "Year" : "Years");
-        document.getElementById("month-suffix").textContent = (date.getMonth() < 2 ? "Month" : "Months");
-        document.getElementById("day-suffix").textContent = (date.getDate() < 2 ? "Day" : "Days");
-        document.getElementById("hour-suffix").textContent = (date.getHours() < 2 ? "Hour" : "Hours");
-        document.getElementById("minute-suffix").textContent = (date.getMinutes() < 2 ? "Minute" : "Minutes");
-        document.getElementById("second-suffix").textContent = (date.getSeconds() < 2 ? "Second" : "Seconds");
-    }
-
-    function updateDateHindZero(date) {
-        if (date.getFullYear() - 1970 <= 0)
-            document.getElementById('year-card').hidden = true;
-        else
-            document.getElementById('year-card').hidden = false;
-        if (date.getMonth() <= 0)
-            document.getElementById('month-card').hidden = true;
-        else
-            document.getElementById('month-card').hidden = false;
-        if (date.getDate() <= 0)
-            document.getElementById('day-card').hidden = true;
-        else
-            document.getElementById('day-card').hidden = false;
-        if (date.getHours() <= 0)
-            document.getElementById('hour-card').hidden = true;
-        else
-            document.getElementById('hour-card').hidden = false;
-        if (date.getMinutes() <= 0)
-            document.getElementById('minute-card').hidden = true;
-        else
-            document.getElementById('minute-card').hidden = false;
-        if (date.getSeconds() <= 0)
-            document.getElementById('second-card').hidden = true;
-        else
-            document.getElementById('second-card').hidden = false;
-    }
-
-    function darkmodeToggle(checkbox) {
-        if (checkbox.checked)
-            setDarkmode();
-        else
-            setLightmode();
-    }
-
-    function sinceToggle(p) {
-        if (sinceDate == RELATIONSHIP_DATE){
-            sinceDate = FLIRT_DATE;
-            p.textContent = "— Flirt Since 28/11/2021 09:26 —";
-        }
-        else {
-            sinceDate = RELATIONSHIP_DATE;
-            p.textContent = "— In Relationship Since 03/02/2022 18:00 —";
-        }
-        updateDate();
-    }
-
-    function imageToggle(img) {
-        if (imageIndex == 0) {
-            imageIndex = 1;
-            img.src = "images/polaroid_paint.png";
-        } else {
-            imageIndex = 0;
-            img.src = "images/polaroid_raw.jpg";
-        }
-    }
-
-    function setDarkmode() {
-        let body = document.getElementById("body");
-        body.classList.remove("bg-light");
-        body.classList.remove("text-dark");
-        body.classList.add("bg-dark");
-        body.classList.add("text-light");
-    }
-
-    function setLightmode() {
-        let body = document.getElementById("body");
-        body.classList.remove("bg-dark");
-        body.classList.remove("text-light");
-        body.classList.add("bg-light");
-        body.classList.add("text-dark");
-    }
+    urlWrapper();
+    let x = setInterval(function () { updateDate(); }, 1000);
+    testDate();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
